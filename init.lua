@@ -179,10 +179,10 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[V]iew Workspace' })
 vim.keymap.set('n', '<leader>v', '<c-v>', { desc = '[V]isual Block Mode' })
 
 -- Remap to replace word in line
-vim.keymap.set('n', '<leader>rl', ':s/<<C-r><C-w>>//g<Left><Left>', { desc = 'Rename in [L]ine' })
+vim.keymap.set('n', '<leader>rl', ':s/<C-r><C-w>//g<Left><Left>', { desc = 'Rename in [L]ine' })
 
 -- Remap to replace word in file
-vim.keymap.set('n', '<leader>rf', ':%s/<<C-r><C-w>>//g<Left><Left>', { desc = 'Rename in [F]ile' })
+vim.keymap.set('n', '<leader>rf', ':%s/<C-r><C-w>//g<Left><Left>', { desc = 'Rename in [F]ile' })
 
 -- Neotree keymaps
 vim.keymap.set('n', '<leader>w/', ':Neotree toggle current reveal_force_cwd<cr>', { desc = '[/] toggle current (Neotree)' })
