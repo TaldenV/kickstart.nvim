@@ -178,6 +178,12 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[V]iew Workspace' })
 -- Remap blockwise Visual mode
 vim.keymap.set('n', '<leader>v', '<c-v>', { desc = '[V]isual Block Mode' })
 
+-- Remap to replace word in line
+vim.keymap.set('n', '<leader>rl', ':s/<<C-r><C-w>>//g<Left><Left>', { desc = 'Rename in [L]ine' })
+
+-- Remap to replace word in file
+vim.keymap.set('n', '<leader>rf', ':%s/<<C-r><C-w>>//g<Left><Left>', { desc = 'Rename in [F]ile' })
+
 -- Neotree keymaps
 vim.keymap.set('n', '<leader>w/', ':Neotree toggle current reveal_force_cwd<cr>', { desc = '[/] toggle current (Neotree)' })
 vim.keymap.set('n', '<leader>wr', ':Neotree toggle reveal<cr>', { desc = 'Toggle [R]eveal (Neotree)' })
@@ -297,6 +303,7 @@ require('lazy').setup({
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>p'] = { name = '[P]lugins', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
       }
     end,
   },
