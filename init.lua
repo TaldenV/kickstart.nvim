@@ -104,6 +104,9 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+-- Enable terminal gui colors
+vim.opt.termguicolors = true
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -185,9 +188,11 @@ vim.keymap.set('n', '<leader>rl', ':s/<<C-r><C-w>>//g<Left><Left>', { desc = 'Re
 vim.keymap.set('n', '<leader>rf', ':%s/<<C-r><C-w>>//g<Left><Left>', { desc = 'Rename in [F]ile' })
 
 -- Neotree keymaps
-vim.keymap.set('n', '<leader>w/', ':Neotree toggle current reveal_force_cwd<cr>', { desc = '[/] toggle current (Neotree)' })
+vim.keymap.set('n', '<leader>w/', ':Neotree toggle current reveal_force_cwd<cr>',
+  { desc = '[/] toggle current (Neotree)' })
 vim.keymap.set('n', '<leader>wr', ':Neotree toggle reveal<cr>', { desc = 'Toggle [R]eveal (Neotree)' })
-vim.keymap.set('n', '<leader>wd', ':Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', { desc = '[D] float reveal file (Neotree)' })
+vim.keymap.set('n', '<leader>wd', ':Neotree float reveal_file=<cfile> reveal_force_cwd<cr>',
+  { desc = '[D] float reveal file (Neotree)' })
 vim.keymap.set('n', '<leader>wb', ':Neotree toggle show buffers right<cr>', { desc = 'Toggle [B]uffers (Neotree)' })
 vim.keymap.set('n', '<leader>gs', ':Neotree float git_status<cr>', { desc = 'Show Git [S]tatus (Neotree)' })
 
@@ -256,6 +261,9 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- needed for nvim-dap
+  { "nvim-neotest/nvim-nio" },
+
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:
   --    require('gitsigns').setup({ ... })
@@ -289,7 +297,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -297,13 +305,20 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>p'] = { name = '[P]lugins', _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+        { "<leader>c",  group = "[C]ode" },
+        { "<leader>c_", hidden = true },
+        { "<leader>d",  group = "[D]ocument" },
+        { "<leader>d_", hidden = true },
+        { "<leader>g",  group = "[G]it" },
+        { "<leader>g_", hidden = true },
+        { "<leader>p",  group = "[P]lugins" },
+        { "<leader>p_", hidden = true },
+        { "<leader>r",  group = "[R]ename" },
+        { "<leader>r_", hidden = true },
+        { "<leader>s",  group = "[S]earch" },
+        { "<leader>s_", hidden = true },
+        { "<leader>w",  group = "[W]orkspace" },
+        { "<leader>w_", hidden = true },
       }
     end,
   },
@@ -337,7 +352,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -744,7 +759,7 @@ require('lazy').setup({
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`
     'folke/tokyonight.nvim',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Load the colorscheme here.
